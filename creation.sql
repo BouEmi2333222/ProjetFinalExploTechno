@@ -6,11 +6,11 @@ USE [SiteTemperature_HT_EB]
 
 CREATE TABLE Utilisateur
 (
-    code                INT                 NOT NULL    PRIMARY KEY     IDENTITY(1,1),
-    nom                 NVARCHAR(64)        NOT NULL,
-    prenom              NVARCHAR(64)        NOT NULL,
-    courriel            NVARCHAR(64)        NOT NULL,
-    motDePasse          BINARY(128)         NOT NULL,
+    code                INT                 NOT NULL    AUTO_INCREMENT PRIMARY KEY,
+    nom                 VARCHAR(64)         NOT NULL,
+    prenom              VARCHAR(64)         NOT NULL,
+    courriel            VARCHAR(64)         NOT NULL,
+    motDePasse          VARCHAR(255)        NOT NULL,
     sel                 UNIQUEIDENTIFIER
 );
 
@@ -27,16 +27,22 @@ CREATE TABLE RoleUtilisateur
     codeUtilisateur     INT                 NOT NULL,
     codeRole            INT                 NOT NULL,
     PRIMARY KEY (codeUtilisateur, codeRole)
+    FOREIGN KEY (codeUtilisateur) REFERENCES Utilisateur(code)
+    FOREIGN KEY (codeRole) REFERENCES Role(code)
 );
 
 CREATE TABLE Temperature
 (
-    DateEnregistre      DATETIME            NOT NULL    PRIMARY KEY     IDENTITY(1,1),
-    TempCelc            DECIMAL(6,3)        NOT NULL,
-    TempFahr            DECIMAL(6,3)        NOT NULL,
-    TempKelv            DECIMAL(6,3)        NOT NULL,
+    code                INT                 NOT NULL    AUTO_INCREMENT PRIMARY KEY,
+    dateEnregistre      DATETIME            NOT NULL,
+    tempCelc            DECIMAL(6,3)        NOT NULL,
+    tempFahr            DECIMAL(6,3)        NOT NULL,
+    tempKelv            DECIMAL(6,3)        NOT NULL
 );
 
-CREATE TABLE StatTemperature
+CREATE TABLE StatTempJour
 (
+    code                INT                 NOT NULL    AUTO_INCREMENT PRIMARY KEY,
+    moyenneTempH        DECIMAL(6,3)        NULL,
+    moyenneTempJ        DECIMAL(6,3)        NULL
 );
