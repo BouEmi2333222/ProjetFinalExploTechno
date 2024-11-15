@@ -34,7 +34,7 @@ CREATE TABLE RoleUtilisateur
 CREATE TABLE Temperature
 (
     code                INT                 NOT NULL    AUTO_INCREMENT PRIMARY KEY,
-    dateEnregistre      DATETIME            NOT NULL,
+    dateEnregistre      DATE                NOT NULL,
     tempCelc            DECIMAL(6,3)        NOT NULL,
     tempFahr            DECIMAL(6,3)        NOT NULL,
     tempKelv            DECIMAL(6,3)        NOT NULL
@@ -43,6 +43,6 @@ CREATE TABLE Temperature
 CREATE TABLE StatTempJour
 (
     code                INT                 NOT NULL    AUTO_INCREMENT PRIMARY KEY,
-    moyenneTempH        DECIMAL(6,3)        NULL,
+    dateJour            DATE                NOT NULL,
     moyenneTempJ        DECIMAL(6,3)        NULL
 );
