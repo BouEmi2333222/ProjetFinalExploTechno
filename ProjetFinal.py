@@ -2,7 +2,15 @@
 import LCD1602
 import os
 import time
+import mysql.connector
 LCD1602.init(0x27, 1)	# init(slave address, background light)
+
+mydb = mysql.connector.connect(
+  	host="localhost",
+  	database="SiteTemperature_HT_EB"
+)
+
+mycursor = mydb.cursor()
 
 def setup():
 	global ds18b20

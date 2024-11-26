@@ -44,5 +44,7 @@ CREATE TABLE StatTempJour
 (
     code                INT                 NOT NULL    AUTO_INCREMENT PRIMARY KEY,
     dateJour            DATE                NOT NULL,
-    moyenneTempJ        DECIMAL(6,3)        NULL
+    moyenneTempC        DECIMAL(6,3)        NULL,
+    moyenneTempF        DECIMAL(6,3)        NULL,
+    moyenneTempK        DECIMAL(6,3)        NULL
 );
