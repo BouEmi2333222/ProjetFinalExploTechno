@@ -59,9 +59,9 @@ class SiteController extends Controller
      *
      * @return string
      */
-    public function actionAccueil()
+    public function actionIndex()
     {
-        return $this->render('accueil');
+        return $this->render('index');
     }
 
     /**
