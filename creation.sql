@@ -1,8 +1,8 @@
-DROP DATABASE IF EXISTS [SiteTemperature_HT_EB]
+DROP DATABASE IF EXISTS SiteTemperature_HT_EB;
 
-CREATE DATABASE [SiteTemperature_HT_EB]
+CREATE DATABASE SiteTemperature_HT_EB;
 
-USE [SiteTemperature_HT_EB]
+USE SiteTemperature_HT_EB;
 
 CREATE TABLE Utilisateur
 (
