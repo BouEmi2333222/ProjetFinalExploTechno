@@ -11,7 +11,7 @@ CREATE TABLE Utilisateur
     prenom              VARCHAR(64)         NOT NULL,
     courriel            VARCHAR(64)         NOT NULL,
     motDePasse          VARCHAR(255)        NOT NULL,
-    sel                 UNIQUEIDENTIFIER
+    sel                 VARCHAR(255)
 );
 
 CREATE TABLE Role
