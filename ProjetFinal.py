@@ -6,10 +6,15 @@ import mysql.connector
 LCD1602.init(0x27, 1)	# init(slave address, background light)
 
 mydb = mysql.connector.connect(
+<<<<<<< HEAD
+  	host="localhost",
+  	database="SiteTemperature_HT_EB"
+=======
   host="localhost",
   user="root",
   password="",
   database="SiteTemperature_HT_EB"
+>>>>>>> 795a5fbb2159bdba516e2bcec32ba96b5ddfd9b3
 )
 
 mycursor = mydb.cursor()

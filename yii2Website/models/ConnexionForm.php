@@ -13,7 +13,7 @@ use yii\base\Model;
  */
 class ConnexionForm extends Model
 {
-    public $username;
+    public $prenom;
     public $password;
     public $rememberMe = true;
 
@@ -27,7 +27,7 @@ class ConnexionForm extends Model
     {
         return [
             // username and password are both required
-            [['username', 'password'], 'required'],
+            [['prenom', 'password'], 'required'],
             // rememberMe must be a boolean value
             ['rememberMe', 'boolean'],
             // password is validated by validatePassword()
@@ -73,7 +73,7 @@ class ConnexionForm extends Model
     public function getUser()
     {
         if ($this->_user === false) {
-            $this->_user = User::findByUsername($this->username);
+            $this->_user = Utilisateur::findByPrenom($this->prenom);
         }
 
         return $this->_user;
