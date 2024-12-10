@@ -7,5 +7,9 @@ mydb = mysql.connector.connect(
   database="SiteTemperature_HT_EB"
 )
 
-print(mydb)
+mycursor = mydb.cursor()
+
+sql = "INSERT INTO Temperature (tempCelc, tempFahr, tempKelv) VALUES (%s, %s, %s, %s)"
+val = (69, 69, 69)
+mycursor.execute(sql, val)
 print("Fin")
