@@ -2,7 +2,7 @@
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=SiteTemperature_HT_EB',
+    'dsn' => 'mysql:host=localhost;dbname=sitetemperature_ht_eb',
     'username' => 'root',
     'password' => '',
     'charset' => 'utf8',

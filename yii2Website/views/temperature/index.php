@@ -14,4 +14,3 @@ use yii\widgets\LinkPager;
 <?php endforeach;?>
 </ul>
 
-<?= LinkPager::widget(['pagination' => $pagination]) ?>
