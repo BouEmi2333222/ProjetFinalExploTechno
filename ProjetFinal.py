@@ -6,9 +6,8 @@ import mysql.connector
 LCD1602.init(0x27, 1)	# init(slave address, background light)
 
 mydb = mysql.connector.connect(
-  host="localhost",
-  user="root",
-  password="",
+  	host="localhost",
+  	database="SiteTemperature_HT_EB"
 )
 
 mycursor = mydb.cursor()
