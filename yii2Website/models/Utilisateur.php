@@ -10,10 +10,10 @@ use Yii;
  * @property int $code
  * @property string $nom
  * @property string $prenom
- * @property string $courriel
+ * @property string|null $courriel
  * @property string $motDePasse
  * @property string|null $sel
- * @property string $authKey
+ * @property string|null $authKey
  *
  * @property Role[] $codeRoles
  * @property Roleutilisateur[] $roleutilisateurs
@@ -34,10 +34,12 @@ class Utilisateur extends \yii\db\ActiveRecord implements \yii\web\IdentityInter
     public function rules()
     {
         return [
-            [['nom', 'prenom', 'courriel', 'motDePasse'], 'required'],
+            [['nom', 'prenom', 'motDePasse'], 'required'],
             [['nom', 'prenom', 'courriel'], 'string', 'max' => 64],
             [['motDePasse', 'sel'], 'string', 'max' => 255],
-            [['authKey'],'string','max' => 50],
+            [['authKey'], 'string', 'max' => 50],
+            [['authKey'], 'unique'],
+            [['courriel'], 'unique'],
         ];
     }
 
@@ -53,6 +55,7 @@ class Utilisateur extends \yii\db\ActiveRecord implements \yii\web\IdentityInter
             'courriel' => 'Courriel',
             'motDePasse' => 'Mot De Passe',
             'sel' => 'Sel',
+            'authKey' => 'Auth Key',
         ];
     }
 
@@ -76,16 +79,16 @@ class Utilisateur extends \yii\db\ActiveRecord implements \yii\web\IdentityInter
         return $this->hasMany(Roleutilisateur::class, ['codeUtilisateur' => 'code']);
     }
 
+    public function getAuthKey(){
+        return $this->authKey;
+    }
+    
     public function getId(){
         return $this->code;
     }
 
-    public function getAuthKey(){
-        return $this->authKey;
-    }
-
     public function validateAuthKey($authKey){
-        $this->authKey === $authKey;
+        return $this->authKey === $authKey;
     }
 
     public static function findIdentity($id){

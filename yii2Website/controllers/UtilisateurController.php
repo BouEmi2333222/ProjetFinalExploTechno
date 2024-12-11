@@ -8,7 +8,7 @@ use app\models\Utilisateur;
 class UtilisateurController extends Controller
 {
     public function actionIndex(){
-        $users = Utilisateur::find()->all();
+        $users = new Utilisateur;
         
         return $this->render('index',['users'=>$users]);
     }

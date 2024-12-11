@@ -23,7 +23,8 @@ class InscriptionForm extends Model
     {
         if ($this->verifierCourriel()){
             $this->insert();
-            return Yii::$app->user->login(Utilisateur::findByCourriel($this->courriel));
+            $user = Utilisateur::findByCourriel($this->courriel);
+            return Yii::$app->user->login($user);
         }
         return false;
     }

@@ -77,7 +77,7 @@ class SiteController extends Controller
 
         $model = new ConnexionForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            return $this->goHome();
         }
 
         $model->password = '';
