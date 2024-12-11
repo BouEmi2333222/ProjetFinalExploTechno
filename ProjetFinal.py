@@ -2,19 +2,16 @@
 import LCD1602
 import os
 import time
+from datetime import datetime
 import mysql.connector
 LCD1602.init(0x27, 1)	# init(slave address, background light)
 
 mydb = mysql.connector.connect(
-<<<<<<< HEAD
-  	host="localhost",
-  	database="SiteTemperature_HT_EB"
-=======
+
   host="localhost",
   user="root",
-  password="",
+  password="cegep",
   database="SiteTemperature_HT_EB"
->>>>>>> 795a5fbb2159bdba516e2bcec32ba96b5ddfd9b3
 )
 
 mycursor = mydb.cursor()
@@ -37,10 +34,6 @@ def readCelsius():
 	temperature = temperature / 1000
 	return temperature
 
-def readFahrenheit():
-	temperature = readCelsius()
-	temperature = (temperature * 1.8) + 32
-	return temperature
 setup()
 while True:
 	if readCelsius() != None:
@@ -50,6 +43,8 @@ while True:
 		LCD1602.write(0, 0,"Celsius : %0.3f " % temperature)
 		LCD1602.write(0,1,"Fahren : %0.3f" % temperatureFahren)
 		print("Kelvin : %0.3f" % temperatureKelvin)
-		sql = "INSERT INTO Temperature (dateEnregistre, tempCelc, tempFahr, tempKelv) VALUES (%s, %s, %s, %s)"
-		val = ("CURRENT_DATE()", temperature, temperatureFahren, temperatureKelvin)
+		sql = "INSERT INTO temperature (dateEnregistre, tempCelc, tempFahr, tempKelv) VALUES (%s, %s, %s, %s)"
+		val = (datetime.now(), temperature, temperatureFahren, temperatureKelvin)
 		mycursor.execute(sql, val)
+		mydb.commit()
+		time.sleep(15)

@@ -11,12 +11,13 @@ CREATE TABLE Utilisateur
     prenom              VARCHAR(64)         NOT NULL,
     courriel            VARCHAR(64)         NOT NULL,
     motDePasse          VARCHAR(255)        NOT NULL,
-    sel                 VARCHAR(255)
+    sel                 VARCHAR(255)        NOT NULL,
+    authKey             VARCHAR(50)         NULL
 );
 
 CREATE TABLE Role
 (
-    code                INT                 NOT NULL    PRIMARY KEY     IDENTITY(1,1),
+    code                INT                 NOT NULL    PRIMARY KEY     AUTO_INCREMENT,
     nom                 VARCHAR(64)         NOT NULL,
     codeRessoure        INT                 NOT NULL,
     typeRessource       VARCHAR(64)         NOT NULL
@@ -26,8 +27,8 @@ CREATE TABLE RoleUtilisateur
 (
     codeUtilisateur     INT                 NOT NULL,
     codeRole            INT                 NOT NULL,
-    PRIMARY KEY (codeUtilisateur, codeRole)
-    FOREIGN KEY (codeUtilisateur) REFERENCES Utilisateur(code)
+    PRIMARY KEY (codeUtilisateur, codeRole),
+    FOREIGN KEY (codeUtilisateur) REFERENCES Utilisateur(code),
     FOREIGN KEY (codeRole) REFERENCES Role(code)
 );
 
