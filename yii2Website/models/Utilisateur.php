@@ -13,6 +13,7 @@ use Yii;
  * @property string $courriel
  * @property string $motDePasse
  * @property string|null $sel
+ * @property string $authKey
  *
  * @property Role[] $codeRoles
  * @property Roleutilisateur[] $roleutilisateurs
@@ -36,6 +37,7 @@ class Utilisateur extends \yii\db\ActiveRecord implements \yii\web\IdentityInter
             [['nom', 'prenom', 'courriel', 'motDePasse'], 'required'],
             [['nom', 'prenom', 'courriel'], 'string', 'max' => 64],
             [['motDePasse', 'sel'], 'string', 'max' => 255],
+            [['authKey'],'string','max' => 50],
         ];
     }
 
@@ -79,11 +81,11 @@ class Utilisateur extends \yii\db\ActiveRecord implements \yii\web\IdentityInter
     }
 
     public function getAuthKey(){
-        throw new \yii\base\NotSupportedException();
+        return $this->authKey;
     }
 
     public function validateAuthKey($authKey){
-        throw new \yii\base\NotSupportedException();
+        $this->authKey === $authKey;
     }
 
     public static function findIdentity($id){
@@ -94,11 +96,11 @@ class Utilisateur extends \yii\db\ActiveRecord implements \yii\web\IdentityInter
         throw new \yii\base\NotSupportedException();
     }
 
-    public static function findByPrenom($prenom){
-        return self::findOne(['prenom'=>$prenom]);
+    public static function findByCourriel($courriel){
+        return self::findOne(['courriel'=>$courriel]);
     }
 
-    public static function validatePassword($password){
+    public function validatePassword($password){
         return $this->motDePasse === $password;
     }
 }

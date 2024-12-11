@@ -3,7 +3,6 @@
 namespace app\controllers;
 
 use yii\web\Controller;
-use yii\data\Pagination;
 use app\models\Temperature;
 
 class TemperatureController extends Controller{
@@ -12,6 +11,6 @@ class TemperatureController extends Controller{
         $temperature = Temperature::find()->all();
 
 
-        return $this->render('index',['temperatures' => $temperature]);
+        return $this->render('index',['temperature' => $temperature]);
     }
 }
