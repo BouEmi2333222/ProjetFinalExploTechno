@@ -38,7 +38,7 @@ class InscriptionForm extends Model
         'nom' => $this->nom,
         'courriel' => $this->courriel,
         'motDePasse' => $this->password,
-        'sel' => CPasswordHelper::generateSalt()
+        'sel' => 'epicsel123',
         ])->execute();
     }
 
