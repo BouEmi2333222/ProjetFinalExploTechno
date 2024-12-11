@@ -1,6 +1,9 @@
 <?php
 
 /** @var yii\web\View $this */
+use app\models\Utilisateur;
+
+
 
 $this->title = 'Projet Final Explo Techno';
 ?>
@@ -11,4 +14,8 @@ $this->title = 'Projet Final Explo Techno';
 
         <p class="lead">Cette page d'accueil est pour le projet final d'exploration technologique d'Émile Bouchard et Henri Tremblay.</p>
     </div>
+
+    <?php 
+ 
+    ?>
 </div>

@@ -1,10 +1,7 @@
 <?php
 
-$nom = 'Bouchard';
+$utilisateur = $users::findByCourriel('boucharde64@gmail.com');
 
-$query = (new \yii\db\Query())
-    ->select(['nom'])
-    ->from('utilisateur')
-    ->where('nom=:nom',[':nom' => $nom]);
-
-echo $query."<br>";
+echo $utilisateur->prenom;
+echo $utilisateur->nom;
+echo $utilisateur->courriel;

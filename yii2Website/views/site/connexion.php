@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="site-login">
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>Veuillez remplir les champs vides pour vous inscrire:</p>
+    <p>Veuillez remplir les champs vides pour vous connecter:</p>
 
     <div class="row">
         <div class="col-lg-5">
@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
             ]); ?>
 
-            <?= $form->field($model, 'prenom')->textInput(['autofocus' => true]) ?>
+            <?= $form->field($model, 'courriel')->textInput(['autofocus' => true]) ?>
 
             <?= $form->field($model, 'password')->passwordInput() ?>
 
@@ -42,14 +42,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
                 </div>
             </div>
-
+            <?= Html::a("Pas de compte? Cliquer içi pour vous en faire un!", ['site/inscription']) ?>
             <?php ActiveForm::end(); ?>
-
-            <div style="color:#999;">
-                You may login with <strong>admin/admin</strong> or <strong>demo/demo</strong>.<br>
-                To modify the username/password, please check out the code <code>app\models\User::$users</code>.
-            </div>
-
         </div>
     </div>
 </div>

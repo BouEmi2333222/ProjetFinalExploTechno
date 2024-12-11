@@ -77,7 +77,7 @@ class SiteController extends Controller
 
         $model = new ConnexionForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            return $this->goHome();
         }
 
         $model->password = '';
@@ -105,8 +105,8 @@ class SiteController extends Controller
      */
     public function actionInscription()
     {
-        $model = new ConnexionForm();
-        if ($model->load(Yii::$app->request->post()) && $model->inscription()) {
+        $model = new InscriptionForm();
+        if ($model->load(Yii::$app->request->post()) && $model->inscription($model)) {
             return $this->goHome();
         }
         return $this->render('inscription', ['model' => $model,]);

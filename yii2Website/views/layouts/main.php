@@ -32,21 +32,21 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 <header id="header">
     <?php
     NavBar::begin([
-        'brandLabel' => Yii::$app->name,
+        'brandLabel' => 'Site Temperature',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => ['class' => 'navbar-expand-md navbar-dark bg-dark fixed-top']
     ]);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav'],
         'items' => [
-            ['label' => 'Accueil', 'url' => ['/site/accueil']],
-            ['label' => 'Temperature', 'url' => ['/site/temperature/index']],
+            ['label' => 'Accueil', 'url' => ['/']],
+            ['label' => 'Temperature', 'url' => ['temperature/index']],
             Yii::$app->user->isGuest
-                ? ['label' => 'Inscription', 'url' => ['/site/inscription']]
+                ? ['label' => 'Connexion', 'url' => ['/site/connexion']]
                 : '<li class="nav-item">'
                     . Html::beginForm(['/site/logout'])
                     . Html::submitButton(
-                        'Logout (' . Yii::$app->user->identity->username . ')',
+                        'Logout (' . Yii::$app->user->identity->prenom . ')',
                         ['class' => 'nav-link btn btn-link logout']
                     )
                     . Html::endForm()
