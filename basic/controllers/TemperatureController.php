@@ -7,6 +7,8 @@ use yii\web\Controller;
 use app\models\Temperature;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
+use yii\helpers\VarDumper;  // Utilisé pour le débogage
+use yii\base\DynamicModel;
 
 class TemperatureController extends Controller{
     public function actionIndex()
@@ -19,42 +21,49 @@ class TemperatureController extends Controller{
 
     public function actionMoyenne()
     {
-        // Créer un modèle temporaire pour le formulaire
-        $model = new \yii\base\DynamicModel(['unit']);
-        
-        // Par défaut, l'unité choisie sera Celsius
-        $unit = 'tempCelc'; 
-
-        if ($model->load(Yii::$app->request->get()) && $model->validate()) {
-            // Si le formulaire est soumis, récupérer l'unité sélectionnée
-            $unit = $model->unit;
-        }
-
-        // Date du jour
         $date = date('Y-m-d'); 
-
-        // Récupérer les températures du jour pour le calcul de la moyenne
         $temperatures = Temperature::find()
-            ->where(['dateEnregistre' => $date]) // Filtrer par date
-            ->all();
+        ->where(['dateEnregistre' => $date]) // Filtrer par date
+        ->all();
 
-        $totalTemperature = 0;
-        $count = 0;
+        $totalTemperatureCelcius = 0;
+        $countCelcius = 0;
+
+        $totalTemperatureFahr = 0;
+        $countFahr = 0;
+
+        $totalTemperatureKelvin = 0;
+        $countKelvin = 0;
 
         // Calculer la somme des températures de l'unité choisie
         foreach ($temperatures as $temp) {
-            $totalTemperature += $temp->$unit;
-            $count++;
+            $temperature = $temp->tempCelc;
+            if ($temperature !== null) {
+                $totalTemperatureCelcius += $temperature;
+                $countCelcius++;
+            }
+            $temperature = $temp->tempFahr;
+            if ($temperature !== null) {
+                $totalTemperatureFahr += $temperature;
+                $countFahr++;
+            }
+            $temperature = $temp->tempKelv;
+            if ($temperature !== null) {
+                $totalTemperatureKelvin += $temperature;
+                $countKelvin++;
+            }
         }
 
         // Calculer la moyenne
-        $averageTemperature = ($count > 0) ? $totalTemperature / $count : null;
+        $averageTemperatureCelc = ($countCelcius > 0) ? $totalTemperatureCelcius / $countCelcius : null;
+        $averageTemperatureFahr = ($countFahr > 0) ? $totalTemperatureFahr / $countFahr : null;
+        $averageTemperatureKelv = ($countKelvin > 0) ? $totalTemperatureKelvin / $countKelvin : null;
 
         // Passer la moyenne et l'unité à la vue
         return $this->render('moyenne', [
-            'averageTemperature' => $averageTemperature,
-            'unit' => $unit,
-            'model' => $model, // Passer le modèle pour le formulaire
+            'averageTemperatureCelc' => $averageTemperatureCelc,
+            'averageTemperatureFahr' => $averageTemperatureFahr,
+            'averageTemperatureKelvin' => $averageTemperatureKelv, // Passer le modèle pour le formulaire
         ]);
     }
 }
